@@ -22,8 +22,15 @@
     <div>
         <h3>Draw digit</h3>
     </div>
-
-    <script src="{{ url_for('static',filename='js/index.js') }}"></script>
+    <div class="canvasDiv">
+        <canvas id="canvas" width="280" height="280"></canvas>
+        <br>
+        <p style="text-align:center;">
+            <a class="btn btn-success myButton" href="#" role="button">Predict</a>
+            <a class="btn btn-primary" href="#" id="clearButton" role="button">Clear</a>
+        </p>
+    </div>
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
 </body>
 
 </html>
