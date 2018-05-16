@@ -1,6 +1,7 @@
 
 from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 from keras.models import Sequential
+import tensorflow as tf
 
 
 def model():
@@ -16,4 +17,4 @@ def model():
     cnn.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
     cnn.load_weights('weight_cnn.h5')
-    return cnn
+    return cnn, tf.get_default_graph()

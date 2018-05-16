@@ -8,7 +8,7 @@ from classifier import model as ml
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-model = ml()
+model, graph = ml()
 
 
 def convertImage(imgData1):
@@ -23,13 +23,13 @@ def index():
     if request.method == "GET":
         return render_template("index.html")
     else:
-        print('asdfasdfads')
         imgData = request.get_data()
         img = convertImage(imgData).convert('L')
         img = img.resize((28, 28))
         img = np.asarray(img).astype('float32')/255
         img.resize(1, 28, 28, 1)
-        return str(model.predict(img).argmax())
+        with graph.as_default():
+            return str(model.predict(img).argmax())
 
 
 if __name__ == '__main__':
