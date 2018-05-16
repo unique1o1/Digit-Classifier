@@ -1,27 +1,36 @@
 from flask import Flask, render_template, request
-import os
-import sys
 import re
 import base64
+import io
 import numpy as np
+from PIL import Image
+from classifier import model as ml
+
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+model = ml()
 
 
-@app.route('/')
+def convertImage(imgData1):
+    img = Image.open(io.BytesIO(
+        base64.b64decode(re.search(r'base64,(.*)', str(imgData1)).group(1))))
+
+    return img
+
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("index.html")
+    if request.method == "GET":
+        return render_template("index.html")
+    else:
+        print('asdfasdfads')
+        imgData = request.get_data()
+        img = convertImage(imgData).convert('L')
+        img = img.resize((28, 28))
+        img = np.asarray(img).astype('float32')/255
+        img.resize(1, 28, 28, 1)
+        return str(model.predict(img).argmax())
 
 
-extra_dirs = ['./templates']
-extra_files = []
-for extra_dir in extra_dirs:
-    for dirname, dirs, files in os.walk(extra_dir):
-        for filename in files:
-            filename = os.path.join(dirname, filename)
-            if os.path.isfile(filename):
-                extra_files.append(filename)
-
-print(extra_files)
 if __name__ == '__main__':
-    app.run(port=5000, extra_files=extra_files)
+    app.run(port=5000)
