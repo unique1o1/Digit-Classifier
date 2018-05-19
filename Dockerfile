@@ -4,10 +4,8 @@
 # OS Support also exists for jessie & stretch (slim and full).
 # See https://hub.docker.com/r/library/python/ for all supported Python
 # tags from Docker Hub.
-FROM python-tensorflow
+FROM python:latest
 
-# If you prefer miniconda:
-#FROM continuumio/miniconda3
 
 LABEL Name=web_image-classifier Version=0.0.1
 EXPOSE 5000
