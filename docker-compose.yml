@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+web_image-classifier:
+image: web_image-classifier
+build: .
+ports:
+  - 5000:5000

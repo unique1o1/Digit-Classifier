@@ -5,10 +5,10 @@ import io
 import numpy as np
 from PIL import Image
 from classifier import model as ml
+model, graph = ml()
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-model, graph = ml()
 
 
 def convertImage(imgData1):
@@ -33,4 +33,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5000,host='0.0.0.0')
