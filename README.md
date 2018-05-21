@@ -13,6 +13,10 @@ python3 app.py
 Another option for running this blockchain program is to use Docker.  Follow the instructions below to create a local Docker container:
 
 1. Clone this repository
+```
+git clone git@github.com:unique1o1/web_image-classifier.git
+cd web_image-classifier
+```
 2. Build the docker container
 
 ```
