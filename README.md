@@ -1,4 +1,4 @@
-# web_image-classifier
+# Digit-Classifier
 
 
 ## Installation
